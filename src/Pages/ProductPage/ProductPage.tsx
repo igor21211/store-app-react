@@ -15,7 +15,7 @@ import Rating from "../../components/Rating/Rating";
 import { useEffect, useState } from "react";
 import { Product } from "../../interfaces/product.interface";
 
-const ProductPage = () => {
+const ProductPage = (): JSX.Element => {
   const [product, setProduct] = useState<Product | null>(null);
   const [mainImg, setImg] = useState<string | undefined>("");
   const [isLoading, setIsloading] = useState<boolean>(false);
@@ -78,7 +78,7 @@ const ProductPage = () => {
           {isLoading ? (
             <Skeleton width={100} height={40} animation="wave" />
           ) : (
-            <Rating rating={product?.rating}></Rating>
+            <Rating rating={product?.rating ?? null}></Rating>
           )}
         </Ratings>
         <Stock>

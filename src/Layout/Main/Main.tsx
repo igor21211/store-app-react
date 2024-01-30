@@ -5,7 +5,7 @@ import Footer from "../../Pages/Footer/Footer";
 import { GridContainer } from "./styled";
 import { Outlet } from "react-router-dom";
 
-const Main = () => {
+const Main = (): JSX.Element => {
   return (
     <GridContainer container spacing={5}>
       <Grid item xs={12}>

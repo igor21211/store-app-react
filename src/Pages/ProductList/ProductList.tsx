@@ -1,12 +1,11 @@
 import { Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import { Product } from "../../interfaces/product.interface";
 import { useParams } from "react-router-dom";
-import NotFound from "../Error/Error";
 import LoadingPageList from "../Loading/LoadingPageList";
 
-const ProductList = () => {
+const ProductList = (): JSX.Element => {
   const [items, setItems] = useState<Product[]>([]);
   const [isLoading, setIsloading] = useState<boolean>(false);
   const param = useParams();

@@ -1,4 +1,3 @@
-import * as React from "react";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -16,7 +15,7 @@ const ProductCard = ({
   price,
   title,
   rating,
-}: Product) => {
+}: Product): JSX.Element => {
   return (
     <ProductWrapper sx={{ maxWidth: 345 }}>
       <Link style={{ textDecoration: "none" }} to={`/product/${id}`}>
