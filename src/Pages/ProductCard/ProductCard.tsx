@@ -7,6 +7,9 @@ import { ProductWrapper } from "./styled";
 import Ratings from "../../components/Rating/Rating";
 import { Link } from "react-router-dom";
 import { Product } from "../../interfaces/product.interface";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { cartActions } from "../../store/cart.slice";
 
 const ProductCard = ({
   id,
@@ -16,6 +19,13 @@ const ProductCard = ({
   title,
   rating,
 }: Product): JSX.Element => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const add = (e: MouseEvent) => {
+    e.preventDefault();
+    dispatch(cartActions.add(id));
+  };
+
   return (
     <ProductWrapper sx={{ maxWidth: 345 }}>
       <Link style={{ textDecoration: "none" }} to={`/product/${id}`}>
@@ -35,7 +45,13 @@ const ProductCard = ({
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant="contained" size="small">
+          <Button
+            variant="contained"
+            size="small"
+            onClick={(e) => {
+              add(e);
+            }}
+          >
             Add to Card
           </Button>
           <Button variant="outlined" size="small">
