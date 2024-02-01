@@ -13,10 +13,13 @@ import AdbIcon from "@mui/icons-material/Adb";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { StyledBadge } from "./styled";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const page = "Products";
 
 const Header = (): JSX.Element => {
+  const items = useSelector((s: RootState) => s.cart.items);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
@@ -116,10 +119,10 @@ const Header = (): JSX.Element => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title={`4 Product at Cart`}>
+            <Tooltip title={`${items.length} Product at Cart`}>
               <Link to={"/cart"}>
                 <IconButton sx={{ p: 0 }}>
-                  <StyledBadge badgeContent={4} color="secondary">
+                  <StyledBadge badgeContent={items.length} color="secondary">
                     <ShoppingCartIcon />
                   </StyledBadge>
                 </IconButton>

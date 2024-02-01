@@ -14,13 +14,20 @@ import { Button, Skeleton } from "@mui/material";
 import Rating from "../../components/Rating/Rating";
 import { useEffect, useState } from "react";
 import { Product } from "../../interfaces/product.interface";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { cartActions } from "../../store/cart.slice";
 
 const ProductPage = (): JSX.Element => {
   const [product, setProduct] = useState<Product | null>(null);
   const [mainImg, setImg] = useState<string | undefined>("");
   const [isLoading, setIsloading] = useState<boolean>(false);
   const param = useParams();
+  const dispatch = useDispatch<AppDispatch>();
 
+  const add = (id: number) => {
+    dispatch(cartActions.add(id));
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -96,7 +103,11 @@ const ProductPage = (): JSX.Element => {
             </>
           ) : (
             <>
-              <Button variant="contained" size="small">
+              <Button
+                variant="contained"
+                size="small"
+                onClick={() => add(product?.id)}
+              >
                 Add to Card
               </Button>
               <Button variant="outlined" size="small">

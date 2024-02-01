@@ -1,3 +1,12 @@
+:root {
+  --font: "Open Sans", sans-serif;
+  --primary-color: #fe724c;
+  --primary-hover-color: #dd6746;
+  --separator-color: #d4d6e0;
+  --white-color: #ffffff;
+  --text-color: #000000;
+  --text-secondary-color: #5b5b5e;
+}
 * {
   margin: 0;
   padding: 0;
