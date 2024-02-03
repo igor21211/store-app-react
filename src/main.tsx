@@ -10,6 +10,7 @@ import ProductPage from "./Pages/ProductPage/ProductPage";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import SuccessPage from "./Pages/SuccesPage/SuccessPage";
+import PaymentPage from "./Pages/Payment/PaymentPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <ProductPage />,
+      },
+      {
+        path: "/pay/:total",
+        element: <PaymentPage />,
       },
       {
         path: "/success",

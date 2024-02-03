@@ -43,9 +43,9 @@ const Card = (): JSX.Element => {
     setCardProducts(res);
   };
 
-  const checkout = () => {
+  const checkout = (total: number) => {
     dispatch(cartActions.clean());
-    navigate("/success");
+    navigate(`/pay/${total}`);
   };
 
   useEffect(() => {
@@ -88,9 +88,9 @@ const Card = (): JSX.Element => {
           disabled={items.length === 0}
           variant="outlined"
           size="large"
-          onClick={checkout}
+          onClick={() => checkout(total + DELIVERY_FREE)}
         >
-          Оформить
+          To make a purchase
         </Button>
       </StyledCheckout>
     </>
