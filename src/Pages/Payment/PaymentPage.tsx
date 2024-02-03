@@ -12,7 +12,7 @@ import {
 } from "./styled";
 import { useNavigate, useParams } from "react-router-dom";
 import Alert from "../../components/Alert/AlertActions";
-import { Box, CircularProgress, LinearProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 const PaymentPage = () => {
   const [cardNumber, setCardNumber] = useState<string>("");

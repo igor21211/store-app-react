@@ -31,8 +31,9 @@ const AutoInput = () => {
     <>
       <InputStyled
         value={value}
-        onChange={(event: any, newValue: string | null) => {
-          setValue(newValue);
+        // @ts-expect-error i dont now how fixed this
+        onChange={(_event: React.SyntheticEvent, value: string | null) => {
+          setValue(value);
         }}
         disablePortal
         id="combo-box-demo"
