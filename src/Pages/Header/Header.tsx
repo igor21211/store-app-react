@@ -7,17 +7,20 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { StyledBadge } from "./styled";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import AutoInput from "../../components/AutoInput/AutoInput";
 
 const page = "Products";
 
-const Header = () => {
+const Header = (): JSX.Element => {
+  const items = useSelector((s: RootState) => s.cart.items);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
@@ -33,23 +36,26 @@ const Header = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            ONLINE - STORE
-          </Typography>
+          <Link to={"/"} style={{ textDecoration: "none" }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              ONLINE - STORE
+            </Typography>
+          </Link>
+          <AutoInput />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -117,10 +123,10 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title={`4 Product at Cart`}>
+            <Tooltip title={`${items.length} Product at Cart`}>
               <Link to={"/cart"}>
                 <IconButton sx={{ p: 0 }}>
-                  <StyledBadge badgeContent={4} color="secondary">
+                  <StyledBadge badgeContent={items.length} color="secondary">
                     <ShoppingCartIcon />
                   </StyledBadge>
                 </IconButton>

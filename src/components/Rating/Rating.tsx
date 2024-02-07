@@ -4,7 +4,7 @@ interface PropsType {
   rating: number | null;
 }
 
-const Ratings = ({ rating }: PropsType) => {
+const Ratings = ({ rating }: PropsType): JSX.Element => {
   const [value, setValue] = React.useState<number | null>(rating);
 
   return (
@@ -17,8 +17,8 @@ const Ratings = ({ rating }: PropsType) => {
       <Rating
         name="simple-controlled"
         value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
+        onChange={(newValue) => {
+          setValue(+newValue);
         }}
       />
     </Box>

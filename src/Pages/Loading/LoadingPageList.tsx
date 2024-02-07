@@ -1,7 +1,6 @@
 import { Grid, Skeleton } from "@mui/material";
-import React from "react";
 
-const LoadingPageList = () => {
+const LoadingPageList = (): JSX.Element => {
   return (
     <Grid
       container

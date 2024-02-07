@@ -1,20 +1,51 @@
-import { Grid, Skeleton } from "@mui/material";
-import React from "react";
+import { Skeleton } from "@mui/material";
+import {
+  ButtonContainer,
+  Discount,
+  ImageContainer,
+  ProductContainer,
+  ProductDescription,
+  Ratings,
+  Stock,
+} from "../ProductPage/styled";
 
 const LoadingProductPage = () => {
   return (
-    <Grid
-      container
-      spacing={{ xs: 2, md: 3 }}
-      columns={{ xs: 4, sm: 8, md: 12 }}
-    >
-      {[1, 2, 3, 4, 5, 6].map((item) => (
-        <Grid item xs={2} sm={4} md={4} key={item}>
-          <Skeleton width={500} height={281} animation="wave" />
-          <Skeleton width={340} height={60} animation="wave" />
-        </Grid>
-      ))}
-    </Grid>
+    <>
+      <ProductContainer>
+        <Skeleton width={500} height={281} animation="wave" />
+        <Skeleton width={100} height={20} animation="wave" />
+        <ProductDescription>
+          <Skeleton width={300} height={20} animation="wave" />
+        </ProductDescription>
+        <p>
+          <Skeleton width={100} height={20} animation="wave" />
+        </p>
+        <Discount>
+          <Skeleton width={100} height={20} animation="wave" />
+        </Discount>
+        <Ratings>
+          <Skeleton width={100} height={40} animation="wave" />
+        </Ratings>
+        <Stock>
+          <Skeleton width={100} height={40} animation="wave" />
+        </Stock>
+        <ButtonContainer>
+          <>
+            <Skeleton width={100} height={40} animation="wave" />
+            <Skeleton width={100} height={40} animation="wave" />
+          </>
+          <>
+            <Skeleton width={100} height={40} animation="wave" />
+            <Skeleton width={100} height={40} animation="wave" />
+          </>
+        </ButtonContainer>
+        <h3>Images:</h3>
+        <ImageContainer>
+          return <Skeleton width={300} height={200} animation="wave" />;
+        </ImageContainer>
+      </ProductContainer>
+    </>
   );
 };
 

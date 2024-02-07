@@ -1,7 +1,6 @@
-import React from "react";
 import { FooterWrapper } from "./styled";
 
-const Footer = () => {
+const Footer = (): JSX.Element => {
   return (
     <FooterWrapper>
       <p>

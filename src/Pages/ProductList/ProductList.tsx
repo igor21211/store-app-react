@@ -1,38 +1,27 @@
 import { Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ProductCard from "../ProductCard/ProductCard";
-import { Product } from "../../interfaces/product.interface";
 import { useParams } from "react-router-dom";
-import NotFound from "../Error/Error";
 import LoadingPageList from "../Loading/LoadingPageList";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
+import { fetchProducts } from "../../store/product.slice";
 
-const ProductList = () => {
-  const [items, setItems] = useState<Product[]>([]);
-  const [isLoading, setIsloading] = useState<boolean>(false);
+const ProductList = (): JSX.Element => {
+  const { items, isLoading, isError } = useSelector<RootState>(
+    (state) => state.products,
+  );
   const param = useParams();
   const { category } = param;
+  const dispath = useDispatch<AppDispatch>();
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        setIsloading(true);
-        const url =
-          param && category
-            ? `https://dummyjson.com/products/category/${param.category}?limit=12`
-            : "https://dummyjson.com/products?limit=12";
-
-        const response = await fetch(url);
-        const data = await response.json();
-        setItems(data.products);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setIsloading(false);
-      }
+      dispath(fetchProducts({ category: category, limit: 12 }));
     };
 
     fetchData();
-  }, [param, category]);
+  }, [dispath, category]);
 
   if (isLoading) {
     return <LoadingPageList />;

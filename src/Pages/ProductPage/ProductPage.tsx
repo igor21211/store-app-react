@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   ButtonContainer,
   Discount,
@@ -10,17 +10,31 @@ import {
   Image,
   Ratings,
 } from "./styled";
-import { Button, Skeleton } from "@mui/material";
+import { Button } from "@mui/material";
 import Rating from "../../components/Rating/Rating";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { Product } from "../../interfaces/product.interface";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { cartActions } from "../../store/cart.slice";
+import LoadingProductPage from "../Loading/LoadingProductPage";
+import Alert from "../../components/Alert/AlertActions";
 
-const ProductPage = () => {
+const ProductPage = (): JSX.Element => {
   const [product, setProduct] = useState<Product | null>(null);
   const [mainImg, setImg] = useState<string | undefined>("");
   const [isLoading, setIsloading] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+  const navigate = useNavigate();
   const param = useParams();
+  const dispatch = useDispatch<AppDispatch>();
 
+  const add = (id: number | undefined) => {
+    if (id !== undefined) {
+      dispatch(cartActions.add(id));
+      setMessage("Successfuly");
+    }
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,87 +54,62 @@ const ProductPage = () => {
     fetchData();
   }, [param]);
 
+  const pay = (e: MouseEvent, price: number | undefined) => {
+    e.preventDefault();
+    navigate(`/pay/${price}`);
+  };
+  if (isLoading) {
+    return <LoadingProductPage />;
+  }
+
   return (
     <>
+      <Alert erorrMsg={message} setErorr={setMessage} />
       <ProductContainer>
-        {isLoading ? (
-          <Skeleton width={500} height={281} animation="wave" />
-        ) : (
-          <ProductImage src={mainImg} alt="Product Thumbnail" />
-        )}{" "}
-        {isLoading ? (
-          <Skeleton width={100} height={20} animation="wave" />
-        ) : (
-          <h2>{product?.title}</h2>
-        )}
+        <ProductImage src={mainImg} alt="Product Thumbnail" />
+        <h2>{product?.title}</h2>
         <ProductDescription>
-          {isLoading ? (
-            <Skeleton width={300} height={20} animation="wave" />
-          ) : (
-            <p>{product?.description}</p>
-          )}
+          <p>{product?.description}</p>
         </ProductDescription>
         <p>
-          {isLoading ? (
-            <Skeleton width={100} height={20} animation="wave" />
-          ) : (
-            <strong>Price: $ {product?.price}</strong>
-          )}
+          <strong>Price: $ {product?.price}</strong>
         </p>
         <Discount>
-          {isLoading ? (
-            <Skeleton width={100} height={20} animation="wave" />
-          ) : (
-            <strong>Discount: {product?.discountPercentage}% </strong>
-          )}
+          <strong>Discount: {product?.discountPercentage}% </strong>
         </Discount>
         <Ratings>
-          {isLoading ? (
-            <Skeleton width={100} height={40} animation="wave" />
-          ) : (
-            <Rating rating={product?.rating}></Rating>
-          )}
+          <Rating rating={product?.rating ?? null}></Rating>
         </Ratings>
         <Stock>
-          {isLoading ? (
-            <Skeleton width={100} height={40} animation="wave" />
-          ) : (
-            <strong>Stock: {product?.stock} units </strong>
-          )}
+          <strong>Stock: {product?.stock} units </strong>
         </Stock>
         <ButtonContainer>
-          {isLoading ? (
-            <>
-              <Skeleton width={100} height={40} animation="wave" />
-              <Skeleton width={100} height={40} animation="wave" />
-            </>
-          ) : (
-            <>
-              <Button variant="contained" size="small">
-                Add to Card
-              </Button>
-              <Button variant="outlined" size="small">
-                One Click Buy
-              </Button>{" "}
-            </>
-          )}
+          <>
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => add(product?.id)}
+            >
+              Add to Card
+            </Button>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={(e) => pay(e, product?.price)}
+            >
+              One Click Buy
+            </Button>{" "}
+          </>
         </ButtonContainer>
         <h3>Images:</h3>
         <ImageContainer>
-          {product?.images.map((el, index) => {
-            if (isLoading) {
-              return <Skeleton width={300} height={200} animation="wave" />;
-            }
-            if (!isLoading) {
-              return (
-                <Image
-                  onClick={() => setImg(el)}
-                  src={el}
-                  alt={`Product Image ${index}`}
-                />
-              );
-            }
-          })}
+          {product?.images.map((el, index) => (
+            <Image
+              onClick={() => setImg(el)}
+              src={el}
+              alt={`Product Image ${index}`}
+            />
+          ))}
         </ImageContainer>
       </ProductContainer>
     </>
