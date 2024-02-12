@@ -3,15 +3,15 @@ import { Product } from "../interfaces/product.interface";
 import { RootState } from "./store";
 
 interface SearchState {
-  products: Product[];
+  search: Product[];
 }
 
 const initialState: SearchState = {
-  products: [],
+  search: [],
 };
 
 export const fetchSearchProducts = createAsyncThunk<Product[]>(
-  "products/fetchProducts",
+  "products/fetchSearchProducts",
   async () => {
     try {
       const url = `https://dummyjson.com/products?limit=100`;
@@ -23,7 +23,7 @@ export const fetchSearchProducts = createAsyncThunk<Product[]>(
       const data = await response.json();
       return data.products;
     } catch (error) {
-      return error.message;
+      console.log(error);
     }
   },
 );
@@ -34,10 +34,10 @@ const searchSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchSearchProducts.fulfilled, (state, action) => {
-      state.products = action.payload;
+      state.search = action.payload;
     });
   },
 });
 
 export default searchSlice.reducer;
-export const selectState = (state: RootState) => state.search.products;
+export const selectState = (state: RootState) => state.search.search;

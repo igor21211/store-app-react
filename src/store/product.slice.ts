@@ -20,7 +20,7 @@ export const fetchProducts = createAsyncThunk<
   {
     rejectValue: string;
   }
->("products/fetchProducts", async (params, { rejectWithValue }) => {
+>("products/fetchProducts", async (params /* { rejectWithValue } */) => {
   try {
     const { category, limit } = params;
     const url = category
@@ -34,7 +34,7 @@ export const fetchProducts = createAsyncThunk<
     const data = await response.json();
     return data.products;
   } catch (error) {
-    return rejectWithValue(error.message);
+    console.log(error);
   }
 });
 
@@ -65,7 +65,7 @@ const productSlice = createSlice({
         (action) => action.type.endsWith("/rejected"),
         (state, action: PayloadAction<string | undefined>) => {
           state.isLoading = false;
-          state.error = action.payload;
+          state.error = action.payload as string; // Use explicit type assertion
         },
       );
   },
