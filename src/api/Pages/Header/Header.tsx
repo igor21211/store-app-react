@@ -14,8 +14,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { StyledBadge } from "./styled";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import AutoInput from "../../components/AutoInput/AutoInput";
+import { RootState } from "../../../store/store";
 
 const page = "Products";
 
@@ -110,7 +109,7 @@ const Header = (): JSX.Element => {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1,display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {/* pages.map((page) => (
               <Button
                 key={page}

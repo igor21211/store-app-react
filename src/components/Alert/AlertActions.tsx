@@ -18,7 +18,7 @@ const Alert: React.FC<AlertProps> = ({ erorrMsg, setErorr }) => {
       setErorr("");
     }
 
-    if (erorrMsg.includes("Success")) {
+    if (erorrMsg.includes("scuccess")) {
       toast.success(erorrMsg);
       setErorr("");
     }
