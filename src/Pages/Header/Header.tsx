@@ -34,7 +34,7 @@ const Header = (): JSX.Element => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" data-testid="header">
         <Toolbar disableGutters>
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <Typography
