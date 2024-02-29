@@ -19,7 +19,11 @@ const ProductList = (): JSX.Element => {
 
   useEffect(() => {
     const fetchData = async () => {
-      dispath(fetchProducts({ category: category, limit: 12 }));
+      try {
+        await dispath(fetchProducts({ category: category, limit: 12 }));
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
     };
 
     fetchData();

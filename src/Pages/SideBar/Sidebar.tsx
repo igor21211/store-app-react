@@ -27,7 +27,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <SideBarDiv>
+    <SideBarDiv data-testid="sidebar">
       <CategoriesList>
         {categories.map((category) => (
           <CategoryItem key={category}>

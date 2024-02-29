@@ -8,7 +8,7 @@ import { Outlet } from "react-router-dom";
 const Main = (): JSX.Element => {
   return (
     <>
-      <GridContainer container spacing={5}>
+      <GridContainer container spacing={5} data-testid="main">
         <Grid item xs={12}>
           <Header />
         </Grid>
@@ -17,7 +17,7 @@ const Main = (): JSX.Element => {
           <Sidebar />
         </Grid>
         <Grid item xs={7}>
-          <Outlet />
+          <Outlet data-testid="outlet" />
         </Grid>
         <Grid item xs={12}>
           <Footer />

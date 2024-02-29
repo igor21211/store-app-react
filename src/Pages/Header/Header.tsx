@@ -34,7 +34,7 @@ const Header = (): JSX.Element => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" data-testid="header">
         <Toolbar disableGutters>
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <Typography
@@ -110,7 +110,7 @@ const Header = (): JSX.Element => {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1,display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {/* pages.map((page) => (
               <Button
                 key={page}

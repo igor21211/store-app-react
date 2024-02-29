@@ -119,6 +119,7 @@ const PaymentPage = () => {
             <StyledInput
               onChange={(e) => handleCvvChange(e)}
               value={cvv}
+              placeholder="CVV/CVC"
               type="number"
             />
           </InputContainer>
